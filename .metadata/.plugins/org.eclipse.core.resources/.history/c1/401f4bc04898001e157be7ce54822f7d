@@ -1,0 +1,5 @@
+package com.demo.Iservices;
+
+public interface ICategory {
+
+}

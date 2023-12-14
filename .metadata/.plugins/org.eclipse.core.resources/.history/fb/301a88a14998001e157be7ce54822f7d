@@ -1,0 +1,5 @@
+package com.demo.Repo;
+
+public interface CategoryRepo {
+
+}

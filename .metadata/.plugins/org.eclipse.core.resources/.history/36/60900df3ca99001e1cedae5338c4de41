@@ -1,0 +1,74 @@
+package com.demo.ServiceImp;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.Iservices.IPost;
+import com.demo.Repo.PostRepo;
+import com.demo.dtos.PostDto;
+import com.demo.entities.Post;
+
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
+public class PostServiceImp implements IPost {
+@Autowired
+PostRepo repo;
+
+@Autowired
+ModelMapper mapper;
+
+	@Override
+	public Post createPost(PostDto postdto) {
+		
+		Post post=this.mapper.map(postdto,Post.class);
+		Post p= repo.save(post);
+		return p;
+	}
+
+	@Override
+	public Post updatepost(PostDto postdtom, Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deletepost(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Post> getAllpost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post getpostById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getpostByCategory(Long categoryid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getpostByUserid(Long userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> searchpost(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

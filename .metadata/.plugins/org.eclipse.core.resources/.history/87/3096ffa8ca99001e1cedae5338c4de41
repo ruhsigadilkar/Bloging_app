@@ -1,0 +1,25 @@
+package com.demo.Iservices;
+
+import java.util.List;
+
+import com.demo.dtos.PostDto;
+import com.demo.entities.Post;
+
+public interface IPost {
+	
+	Post createPost(PostDto postdto);
+	
+	
+ 	Post updatepost(PostDto postdtom, Long id);
+ 	
+ 	void deletepost(Long id);
+ 	
+ 	List<Post> getAllpost();
+ 	
+ 	Post getpostById(Long id);
+ 	
+ 	List<Post> getpostByCategory(Long categoryid);
+ 	
+ 	List<Post> getpostByUserid(Long userid);
+
+}

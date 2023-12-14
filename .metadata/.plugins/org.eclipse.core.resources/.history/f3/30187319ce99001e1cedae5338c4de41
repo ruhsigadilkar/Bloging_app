@@ -1,0 +1,15 @@
+package com.demo.dtos;
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+
+public class PostDto {
+
+	String title;
+
+	String content;
+	String image="defaut.png";
+
+	Date adddate;
+}

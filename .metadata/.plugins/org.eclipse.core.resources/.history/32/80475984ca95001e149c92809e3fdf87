@@ -1,0 +1,12 @@
+server.servlet.session.persistent=false
+#DB Properties
+spring.datasource.url=jdbc:mysql://localhost:3306/elight?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.username=root
+spring.datasource.password=root
+# JPA properties
+spring.jpa.show-sql = true
+spring.jpa.hibernate.ddl-auto = update
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
+#Disable open session in view  design pattern that allows the Hibernate session
+# (or JPA entity manager) to remain open beyond the scope of a single database
+spring.jpa.open-in-view=false

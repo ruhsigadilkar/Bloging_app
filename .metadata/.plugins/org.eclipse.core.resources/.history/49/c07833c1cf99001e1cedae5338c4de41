@@ -1,0 +1,28 @@
+package com.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.demo.Iservices.IPost;
+import com.demo.dtos.PostDto;
+
+@RestController
+@RequestMapping("/post")
+public class PostController {
+
+	@Autowired
+	IPost post;
+
+	@PostMapping("/user/{userid}/categoey/{categoryid}/post")
+	ResponseEntity<String> cetarepost( @PathVariable Long userid,@PathVariable Long categoryid,  @RequestBody PostDto dto) {
+
+		return null;
+
+	}
+
+}

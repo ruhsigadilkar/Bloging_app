@@ -1,0 +1,18 @@
+package com.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.demo.entities.Temp;
+
+@SpringBootApplication
+public class BlogPostApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BlogPostApplication.class, args);
+		Temp tem= new Temp();
+	
+		
+	}
+
+}

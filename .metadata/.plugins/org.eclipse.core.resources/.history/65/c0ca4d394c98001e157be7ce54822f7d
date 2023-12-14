@@ -1,0 +1,18 @@
+package com.demo.dtos;
+
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+public class CategoryDto {
+
+	@NotEmpty
+	Long category_id;
+	@NotEmpty(message = "category title should be fiiled")
+	String categoryTitle;
+
+	@NotEmpty
+	@Size(min = 10, max = 100, message = "min 10 character required")
+	String categorydescription;
+
+}

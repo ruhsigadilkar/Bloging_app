@@ -1,0 +1,15 @@
+package com.demo.entities;
+
+import jakarta.persistence.Entity;
+
+@Entity
+
+public class Post {
+	
+	
+	private Long postid;
+	String title;
+	String content;
+	String image;
+
+}

@@ -1,0 +1,96 @@
+package com.demo.ServiceImp;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.Iservices.IUser;
+import com.demo.Repo.UserRepo;
+import com.demo.dtos.UserDto;
+import com.demo.entities.User;
+import com.demo.gloabalExceptions.ResourseNotFound;
+
+import jakarta.transaction.Transactional;
+@Service
+@Transactional
+public class userServicesImpl implements IUser {
+
+	@Autowired
+	UserRepo repo;
+
+	@Override
+	public UserDto Createuser(UserDto dto) {
+
+		User user = this.dtoToUser(dto);
+
+		User saveuser = repo.save(user);
+		return this.UserToDto(saveuser);
+	}
+
+	@Override
+	public UserDto upadteuser(UserDto dto, Long id) {
+		Optional<User> user = repo.findById(id);
+		User peruser = user.orElseThrow(() -> new ResourseNotFound("UserNot found " + id));
+		peruser.setId(dto.getId());
+		peruser.setAbout(dto.getAbout());
+		peruser.setEmail(dto.getEmail());
+		peruser.setName(dto.getName());
+		peruser.setPassword(dto.getPassword());
+
+		UserDto dtouser = this.UserToDto(peruser);
+
+		return dtouser;
+	}
+
+	@Override
+	public UserDto getuserById(Long id) {
+		Optional<User> user = repo.findById(id);
+		User peruser = user.orElseThrow(() -> new ResourseNotFound("UserNot found " + id));
+		UserDto dto = this.UserToDto(peruser);
+		return dto;
+	}
+
+	@Override
+	public List<UserDto> getallusers() {
+
+		List<User> user = repo.findAll();
+		List<UserDto> userdto=user.stream().map(use -> this.UserToDto(use)).collect(Collectors.toList());
+
+		return UserDto;
+	}
+
+	@Override
+	public void deleteUser(Long id) {
+		UserDto user=	getuserById(id);
+		User us=this.dtoToUser(user);
+		repo.delete(us);
+
+	}
+
+	User dtoToUser(UserDto user) {
+
+		User usr = new User();
+		usr.setId(user.getId());
+		usr.setAbout(user.getAbout());
+		usr.setEmail(user.getEmail());
+		usr.setName(user.getName());
+		usr.setPassword(user.getPassword());
+
+		return usr;
+	}
+
+	UserDto UserToDto(User user) {
+		UserDto usr = new UserDto();
+		usr.setId(user.getId());
+		usr.setAbout(user.getAbout());
+		usr.setEmail(user.getEmail());
+		usr.setName(user.getName());
+		usr.setPassword(user.getPassword());
+
+		return usr;
+	}
+
+}

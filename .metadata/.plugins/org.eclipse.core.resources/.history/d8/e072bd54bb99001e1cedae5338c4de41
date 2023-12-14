@@ -1,0 +1,92 @@
+package com.demo.ServiceImp;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.Iservices.ICategory;
+import com.demo.Repo.CategoryRepo;
+import com.demo.dtos.CategoryDto;
+import com.demo.entities.Category;
+import com.demo.gloabalExceptions.ResourseNotFound;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class CategoryservicesImp implements ICategory {
+	@Autowired
+	CategoryRepo repo;
+	@Autowired
+	ModelMapper mapper;
+
+	@Override
+	public CategoryDto createcategory(CategoryDto cat) {
+		Category persistcategort = this.dtoTocategory(cat);
+		persistcategort = this.repo.save(persistcategort);
+		CategoryDto dtocategory = this.categoryTodto(persistcategort);
+		return dtocategory;
+	}
+
+	@Override
+	public CategoryDto getcategory(Long id) {
+		Optional<Category> categor = this.repo.findById(id);
+		Category persistcategory = categor.orElseThrow(() -> new ResourseNotFound("Category is not found " + id));
+
+		CategoryDto savecatory = this.categoryTodto(persistcategory);
+
+		return savecatory;
+	}
+
+	@Override
+	public List<CategoryDto> getallCategory() {
+		List<CategoryDto> listdto = new ArrayList<>();
+		List<Category> categorylist = this.repo.findAll();
+
+		for (Category cat : categorylist) {
+
+			listdto.add(this.categoryTodto(cat));
+		}
+
+		return listdto;
+	}
+
+	@Override
+	public CategoryDto updateCategory(Long id, CategoryDto dto) {
+		CategoryDto category = getcategory(id);
+		category.setCategory_id(dto.getCategory_id());
+		category.setCategorydescription(dto.getCategorydescription());
+		category.setCategoryTitle(dto.getCategoryTitle());
+		Category cat = this.dtoTocategory(category);
+
+		repo.save(cat);
+		return category;
+
+	}
+
+	@Override
+	public void deleteCategory(Long id) {
+		CategoryDto category = getcategory(id);
+		Category percategory=this.dtoTocategory(category);
+		this.repo.delete(percategory);
+
+	}
+
+	private CategoryDto categoryTodto(Category cat) {
+		CategoryDto dto = this.mapper.map(cat, CategoryDto.class);
+		return dto;
+
+	}
+
+	private Category dtoTocategory(CategoryDto dto) {
+		// TODO Auto-generated method stub
+		Category category = this.mapper.map(dto, Category.class);
+		return category;
+
+	}
+
+}

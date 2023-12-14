@@ -1,0 +1,29 @@
+package com.demo;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.demo.Repo.UserRepo;
+
+@SpringBootTest
+class BlogPostApplicationTests {
+	@Autowired
+	UserRepo repo;
+
+	@Test
+	void contextLoads() {
+	}
+
+	@Test
+	public void repotest() {
+		String classname = this.repo.getClass().getName();
+		System.out.println(classname);
+		String pkgname = this.repo.getClass().getPackageName();
+		String n=this.repo.getClass().getInterfaces().toString();
+
+		System.out.println(n);
+
+	}
+
+}

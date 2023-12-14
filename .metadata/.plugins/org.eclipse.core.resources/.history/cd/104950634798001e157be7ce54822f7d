@@ -1,0 +1,16 @@
+package com.demo.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Category")
+
+public class Category {
+	
+	Long category_id;
+	String categoryTitle'
+	String categorydescription;
+	
+
+}
